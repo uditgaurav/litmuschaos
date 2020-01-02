@@ -1,0 +1,64 @@
+---
+stages:
+  - setup
+  - install
+  - deploy
+  - test
+  - push
+  - app-cleanup
+  - cleanup
+
+ClusterSetup:
+
+  stage: setup
+  tags:
+    - setup
+  script: 
+    - chmod 755 ./build/gitlab/stages/1-cluster-setup/gcp
+    - ./build/gitlab/stages/1-cluster-setup/gcp
+
+  artifacts:
+    when: always
+    paths:
+      - .kube/
+
+InstallLitmus:
+
+  stage: install
+  tags:
+    - setup
+  script:
+    - make install
+    
+DeployApp:
+
+  stage: deploy
+  tags:
+    - setup
+  script:
+    - make deployapp
+
+AppCleanup:
+
+  when: always
+  stage: app-cleanup
+  tags: 
+    - cleanup
+  script:
+    - make app-cleanup 
+
+
+ClusterCleanup:
+
+  when: always
+  stage: cleanup
+  tags:
+    - cleanup
+  script: 
+    - chmod 755 ./build/gitlab/stages/2-cluster-cleanup/cluster-cleanup
+    - ./build/gitlab/stages/2-cluster-cleanup/cluster-cleanup
+
+  artifacts:
+    when: always
+    paths:
+      - .kube/
