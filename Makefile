@@ -30,7 +30,7 @@ deployapp:
 	@echo "--------------------"
 	@echo "Deploying app"
 	@echo "--------------------"
-	@go run /test/deploy_app.go
+	@go run test/deploy_app.go
 
 .PHONY: liveness
 liveness:
@@ -54,7 +54,6 @@ app-cleanup:
 	@echo "--------------------"
 	@kubectl delete -f https://raw.githubusercontent.com/litmuschaos/chaos-operator/master/deploy/chaos_crds.yaml
 	@kubectl delete -f https://raw.githubusercontent.com/litmuschaos/chaos-operator/master/deploy/rbac.yaml
-	@kubectl delete -f https://raw.githubusercontent.com/litmuschaos/chaos-operator/master/deploy/operator.yaml
-	@kubeclt delete deploy nginx -f litmus
+	@kubeclt delete deploy nginx -n litmus
 
 
