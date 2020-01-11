@@ -23,6 +23,11 @@ Naag Raaj
 6362244512
 
 
+------
+visudo
+------
+gitlab-runner ALL=(ALL) NOPASSWD: ALL
+
 PROJECT - 2
 --------------------
 1. sed-command : 
