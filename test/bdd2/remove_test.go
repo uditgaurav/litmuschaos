@@ -116,6 +116,22 @@ var _ = AfterSuite(func() {
 
 	//Removing Other OpenEBS Componentes
 
+	//Removing SPC
+	By("Deleting SPC")
+	err = exec.Command("kubectl", "delete", "-f", "spc", "--all").Run()
+	Expect(err).To(BeNil(), "failed to delete spc")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	//Removing PV
+	By("Deleting Pv")
+	err = exec.Command("kubectl", "delete", "pv", "-n", ,"openebs", "--all").Run()
+	Expect(err).To(BeNil(), "failed to delete pv")
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	//Removing Blockdevices
 	By("Deleting Blockdevices")
 	err = exec.Command("kubectl", "delete", "-f", "bd", "-n", "openebs", "--all").Run()
@@ -124,26 +140,10 @@ var _ = AfterSuite(func() {
 		fmt.Println(err)
 	}
 
-	//Removing BlockDeviceClaim
-	By("Deleting BDC")
-	err = exec.Command("kubectl", "delete", "-f", "bdc", "-n", "openebs", "--all").Run()
-	Expect(err).To(BeNil(), "failed to delete the bdc")
-	if err != nil {
-		fmt.Println(err)
-	}
-
 	//Removing CSP
 	By("Deleting CSP")
 	err = exec.Command("kubectl", "delete", "-f", "csp", "--all").Run()
 	Expect(err).To(BeNil(), "failed to delete csp")
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	//Removing SPC
-	By("Deleting SPC")
-	err = exec.Command("kubectl", "delete", "-f", "spc", "--all").Run()
-	Expect(err).To(BeNil(), "failed to delete spc")
 	if err != nil {
 		fmt.Println(err)
 	}
