@@ -108,7 +108,7 @@ var _ = BeforeSuite(func() {
 
 	//Removing Application
 	By("Deleting Application,Service and PVC")
-	err = exec.Command("kubectl", "delete", "-f", "percona.yaml").Run()
+	err = exec.Command("kubectl", "delete", "-f", "../../percon/deployment.yaml").Run()
 	Expect(err).To(BeNil(), "failed to delete application and its components")
 	if err != nil {
 		fmt.Println(err)

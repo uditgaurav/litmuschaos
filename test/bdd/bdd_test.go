@@ -15,8 +15,8 @@ import (
 	_ "k8s.io/client-go/plugin/pkg/client/auth/gcp"
 	"k8s.io/client-go/tools/clientcmd"
 
-	"github.com/litmuschaos/chaos-operator/pkg/apis/litmuschaos/v1alpha1"
-	chaosClient "github.com/litmuschaos/chaos-operator/pkg/client/clientset/versioned/typed/litmuschaos/v1alpha1"
+	"github.com/uditgaurav1/litmuschaos/pkg/apis/litmuschaos/v1alpha1"
+	chaosClient "github.com/uditgaurav1/litmuschaos/pkg/client/clientset/versioned/typed/litmuschaos/v1alpha1"
 	restclient "k8s.io/client-go/rest"
 )
 
