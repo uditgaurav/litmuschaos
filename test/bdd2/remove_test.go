@@ -33,7 +33,7 @@ func TestChaos(t *testing.T) {
 	RunSpecs(t, "BDD test")
 }
 
-var _ = BeforeSuite(func() {
+var _ = AfterSuite(func() {
 
 	var err error
 	kubeconfig = os.Getenv("HOME") + "/.kube/config"
