@@ -170,7 +170,7 @@ var _ = BeforeSuite(func() {
 		fmt.Println(err)
 	}
 
-	fmt.Println("]OpenEBS pools successfully Created")
+	fmt.Println("OpenEBS pools successfully Created")
 
 	//wait for 5 Seconds
 	time.Sleep(5 * time.Second)
@@ -186,7 +186,7 @@ var _ = BeforeSuite(func() {
 
 	//Deploying percona application
 	By("Deploying percona Application")
-	err = exec.Command("kubectl", "apply", "-f", "percona.yml").Run()
+	err = exec.Command("kubectl", "apply", "-f", "../../percona/deployment.yml").Run()
 	Expect(err).To(BeNil(), "failed to create the application")
 	if err != nil {
 		fmt.Println(err)
