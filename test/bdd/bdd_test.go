@@ -1,4 +1,4 @@
-package remove
+package bdd
 
 import (
 	"fmt"
@@ -140,7 +140,7 @@ var _ = BeforeSuite(func() {
 
 	fmt.Println("Openebs Installed successfully")
 
-	//Install OpenEBS Chaos Charts
+	//Get OpenEBS Chaos Charts
 
 	By("Installing OpenEBS Charts")
 	err = exec.Command("wget", "https://openebs.github.io/charts/openebs-operator-1.2.0.yaml").Run()
@@ -148,6 +148,8 @@ var _ = BeforeSuite(func() {
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	fmt.Println("Get OpenEBS Chaos Charts")
 
 	//Changing the required field
 
@@ -158,6 +160,8 @@ var _ = BeforeSuite(func() {
 		fmt.Println(err)
 	}
 
+	fmt.Println("Edit the required fields in chaos charts")
+
 	//Creating Pools
 	By("Creating OpenEBs Pool")
 	err = exec.Command("kubectl", "apply", "-f", "openebs-operator-1.2.0.yaml").Run()
@@ -165,6 +169,8 @@ var _ = BeforeSuite(func() {
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	fmt.Println("]OpenEBS pools successfully Created")
 
 	//wait for 5 Seconds
 	time.Sleep(5 * time.Second)
@@ -176,5 +182,15 @@ var _ = BeforeSuite(func() {
 	if err != nil {
 		fmt.Println(err)
 	}
+	fmt.Println("Storage class is present")
+
+	//Deploying percona application
+	By("Deploying percona Application")
+	err = exec.Command("kubectl", "apply", "-f", "percona.yml").Run()
+	Expect(err).To(BeNil(), "failed to create the application")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("Application Successfully created")
 
 })
