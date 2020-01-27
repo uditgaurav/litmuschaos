@@ -1,64 +1,93 @@
 ---
 stages:
-  - setup
-  - install
-  - deploy
-  - test
-  - push
-  - app-cleanup
-  - cleanup
 
-ClusterSetup:
+  - cluster setup
+  - install litmus and openebs
+  - experiment
+  - openebs and litmus cleanup
+  - cluster cleanup
 
-  stage: setup
+Cluster Setup:
+
+  stage: cluster setup
   tags:
     - setup
   script: 
-    - chmod 755 ./build/gitlab/stages/1-cluster-setup/gcp
-    - ./build/gitlab/stages/1-cluster-setup/gcp
+    - chmod 755 ./build/gitlab/stages/1-gke-setup/cluster-setup
+    - ./build/gitlab/stages/1-gke-setup/cluster-setup
+
+  artifacts:
+    when: always
+    paths:
+      - .kube/
+  
+Install Litmus and OpenEBS:
+  
+  stage: install litmus and openebs
+  tags:
+    - install
+  script:
+
+    - export GOPATH=$HOME/go
+    - export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+    - pwd
+    - mkdir -p $HOME/go/src/github.com/${REPONAME}/${IMAGENAME}
+    - rsync -az --delete ${CI_PROJECT_DIR}/ ${GOPATH}/src/github.com/${REPONAME}/${IMAGENAME}/ #CI_PROJECT_DIR is full path where project is cloned
+    - cd tests
+    - go env
+    - pwd
+    - cd $HOME/go/src/github.com/${REPONAME}/${IMAGENAME}/tests
+    - go test bdds/setup_test.go -v
 
   artifacts:
     when: always
     paths:
       - .kube/
 
-InstallLitmus:
 
-  stage: install
+OpenEBS Pool Container Failure:
+  
+  stage: experiment
   tags:
-    - setup
+    - experiment
   script:
-    - make install
+
+    - cd $HOME/go/src/github.com/${REPONAME}/${IMAGENAME}/tests
+    - go test bdds/openebs-pool-container-failure_test.go -v
+
+  artifacts:
+    when: always
+    paths:
+      - .kube/
+
+Removing Litmus and OpenEBS:
+  
+  stage: openebs and litmus cleanup
+  tags:
+    - cleanup
+  script:
+
+    - cd $HOME/go/src/github.com/${REPONAME}/${IMAGENAME}/tests
+    - go test bdds/cleanup_test.go -v
     
-DeployApp:
-
-  stage: deploy
-  tags:
-    - setup
-  script:
-    - make deployapp
-
-AppCleanup:
+  artifacts:
+    when: always
+    paths:
+      - .kube/
+    
+Cluster Cleanup:
 
   when: always
-  stage: app-cleanup
-  tags: 
-    - cleanup
-  script:
-    - make app-cleanup 
-
-
-ClusterCleanup:
-
-  when: always
-  stage: cleanup
+  stage: cluster cleanup
   tags:
     - cleanup
   script: 
-    - chmod 755 ./build/gitlab/stages/2-cluster-cleanup/cluster-cleanup
-    - ./build/gitlab/stages/2-cluster-cleanup/cluster-cleanup
+    - chmod 755 ./build/gitlab/stages/2-gke-cleanup/cluster-cleanup
+    - ./build/gitlab/stages/2-gke-cleanup/cluster-cleanup
 
   artifacts:
     when: always
     paths:
       - .kube/
+
+
