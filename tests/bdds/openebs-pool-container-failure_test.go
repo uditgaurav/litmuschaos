@@ -142,7 +142,7 @@ var _ = Describe("BDD on chaos-operator", func() {
 				fmt.Println(err)
 			}
 
-			fmt.Println("Chaos Engine is created Successfully...")
+			fmt.Println("Chaosengine created successfully...")
 
 			//Fetching engine-nginx-runner pod
 			runner, err := client.CoreV1().Pods("litmus").Get("engine-runner", metav1.GetOptions{})
@@ -152,7 +152,7 @@ var _ = Describe("BDD on chaos-operator", func() {
 				if string(runner.Status.Phase) != "Succeeded" {
 					time.Sleep(10 * time.Second)
 					runner, _ = client.CoreV1().Pods("litmus").Get("engine-runner", metav1.GetOptions{})
-					fmt.Printf("Currently runner is in %v State, Please Wait to get it completed...\n", runner.Status.Phase)
+					fmt.Printf("Current Runner is in %v State, Please Wait ...\n", runner.Status.Phase)
 				} else {
 					break
 				}
@@ -162,9 +162,14 @@ var _ = Describe("BDD on chaos-operator", func() {
 
 			//Checking the chaosresult
 			By("Checking the chaosresult")
+			// verdict := exec.Command("kubectl", "get", "chaosresult", "engine-openebs-pool-container-failure", "-n", "litmus", "-o", "jsonpath='{.spec.experimentstatus.verdict}'").Run()
+			// if verdict == "pass" {
+			//      fmt.Printf("The experiments ends with the verdict : %v", verdict)
+			// } else {
+			//      Fail("The verdict of chaosresult is Not Pass")
+			// }
 			app, _ := clientSet.ChaosResults("litmus").Get("engine-openebs-pool-container-failure", metav1.GetOptions{})
 			Expect(string(app.Spec.ExperimentStatus.Verdict)).To(Equal("Pass"), "Verdict is not pass chaosresult")
-			fmt.Printf("The Verdict of the experiment is Pass")
 		})
 	})
 
