@@ -112,6 +112,7 @@ var _ = BeforeSuite(func() {
 	if err != nil {
 		fmt.Println(err)
 	}
+
 	// Checking status of OpenEBS Pods
 	f := 0
 
@@ -147,20 +148,15 @@ var _ = BeforeSuite(func() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	fmt.Println("Get OpenEBS Chaos Charts")
-
 	//Changing the required field
-
 	By("Changing the required field")
 	err = exec.Command("sed", "-i", "157 s/false/true/", "openebs-operator-1.2.0.yaml").Run()
 	Expect(err).To(BeNil(), "failed to make changes in OpenEBS Charts")
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	fmt.Println("Edit the required fields in chaos charts")
-
 	//Creating Pools
 	By("Creating OpenEBs Pool")
 	err = exec.Command("kubectl", "apply", "-f", "openebs-operator-1.2.0.yaml").Run()
@@ -168,21 +164,9 @@ var _ = BeforeSuite(func() {
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	fmt.Println("OpenEBS pools successfully Created")
-
 	//wait for 30 Seconds
 	time.Sleep(30 * time.Second)
-
-	//Checking whether Cstor Storage pool is Present
-	By("Checking the Storage Class")
-	err = exec.Command("kubectl", "get", "spc").Run()
-	Expect(err).To(BeNil(), "failed to get the Storage Pool")
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println("Storage class is present")
-
 	//Deploying percona application
 	By("Deploying percona Application")
 	err = exec.Command("kubectl", "apply", "-f", "../../percona/deployment.yml").Run()
@@ -193,10 +177,10 @@ var _ = BeforeSuite(func() {
 	fmt.Println("Application Successfully created")
 
 	//Get the status of percona Application
-	app, _ := client.AppsV1().Deployments("default").Get("percona", metav1.GetOptions{})
+	app, _ := client.AppsV1().Deployments("litmus").Get("percona", metav1.GetOptions{})
 	count = 0
 	for app.Status.UnavailableReplicas != 0 {
-		if count < 50 {
+		if count < 30 {
 			fmt.Printf("Percona is getting ready Currently Unavaliable Count is: %v \n", app.Status.UnavailableReplicas)
 			app, _ = client.AppsV1().Deployments("default").Get("percona", metav1.GetOptions{})
 			time.Sleep(10 * time.Second)
@@ -207,4 +191,3 @@ var _ = BeforeSuite(func() {
 	}
 
 })
-
