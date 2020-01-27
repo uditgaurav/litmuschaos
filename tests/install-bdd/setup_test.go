@@ -174,10 +174,10 @@ var _ = BeforeSuite(func() {
 	//wait for 30 Seconds
 	time.Sleep(30 * time.Second)
 
-	//Checking whether Cstor Storage Class is Present
+	//Checking whether Cstor Storage pool is Present
 	By("Checking the Storage Class")
-	err = exec.Command("kubectl", "get", "sc", "openebs-cstor-sparse").Run()
-	Expect(err).To(BeNil(), "failed to get the Storage Class")
+	err = exec.Command("kubectl", "get", "spc").Run()
+	Expect(err).To(BeNil(), "failed to get the Storage Pool")
 	if err != nil {
 		fmt.Println(err)
 	}
