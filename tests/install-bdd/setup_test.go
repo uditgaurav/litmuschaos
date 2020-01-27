@@ -1,4 +1,4 @@
-package bdd
+package remove
 
 import (
 	"fmt"
@@ -98,7 +98,8 @@ var _ = BeforeSuite(func() {
 			time.Sleep(5 * time.Second)
 			count++
 		} else {
-			Fail("Litmus Deletion Failed Time Out")
+			Fail("Litmus Deletion Failed/home/gitlab-runner/builds/ye65ooHs/0/litmuschaos/litmus-openebs/tests
+			Time Out")
 		}
 	}
 
@@ -189,7 +190,7 @@ var _ = BeforeSuite(func() {
 	Expect(err).To(BeNil(), "failed to create the application")
 	if err != nil {
 		fmt.Println(err)
-	}
+	}deploymentdeployment
 	fmt.Println("Application Successfully created")
 
 	//Get the status of percona Application
@@ -205,4 +206,5 @@ var _ = BeforeSuite(func() {
 			Fail("Litmus Deletion Failed Time Out")
 		}
 	}
+
 })
