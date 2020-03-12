@@ -16,6 +16,9 @@ litmus/chaos -Image used
 --------------------------------------------------
 image: openebs/ansible-runner:ci
 
+git commands
+git checkout -b udit upstream/generic-staging --track
+
 sudo -H pip install --upgrade ansible
 
 
