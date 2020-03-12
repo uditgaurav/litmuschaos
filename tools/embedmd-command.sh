@@ -21,6 +21,8 @@ embedmd -w node-drain.md
 
 embedmd -w pod-network-corruption.md
 
+embedmd -w node-memory-hog.md
+
 echo "embding openebs experiments"
 
 embedmd -w openebs-pool-pod-failure.md
