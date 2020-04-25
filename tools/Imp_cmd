@@ -21,6 +21,7 @@ git checkout -b udit upstream/generic-staging --track
 
 sudo -H pip install --upgrade ansible
 
+udit-ThinkPad-E490
 
 Naag Raaj
 6362244512
