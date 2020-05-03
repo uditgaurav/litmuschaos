@@ -1,0 +1,37 @@
+name: Go
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run ubuntu command
+      run: ls -ltr
+
+    - name: Running pod delete chaos experiment
+      uses: uditgaurav/kubernetes-chaos@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        ##if litmus is not installed
+#         INSTALL_LITMUS: true
+        ##Give application info under chaos
+        ##Currently supporting "deployment" applications.
+        APP_NS: default
+        APP_LABEL: run=nginx
+        EXPERIMENT_NAME: pod-delete
+        TOTAL_CHAOS_DURATION: 30
+        CHAOS_INTERVAL: 10
+        FORCE: false
+        ##Select true if you want to uninstall litmus after chaos
+#         LITMUS_CLEANUP: true
+
+
+
