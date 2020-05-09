@@ -9,7 +9,7 @@ export GCP_SERVICE_ACCOUNT_FILE="$path/key.json"
 export GKEUSER=`echo $GKE_USER`
 
 git clone https://github.com/uditgaurav/litmuschaos.git
-cd litmus-e2e/build/github/stages/
+cd litmuschaos/build/github/stages/
 
 mkdir -p logs
 touch ~/logs/clusters
