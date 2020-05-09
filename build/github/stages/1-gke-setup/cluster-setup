@@ -19,14 +19,12 @@ mkdir -p logs
 echo "creating cluster"
 
 ansible-playbook create-gke-cluster.yml -vv --extra-vars "project=${PROJECT_NAME}"
+mkdir $path/.kube
 KUBE_CONFIG_DATA=$(<~/.kube/config)
-
-# mkdir -p .kube
-# echo $path
-# cat ~/.kube/config > $path/.kube/config
-# cat ~/.kube/config > $path/.kube/admin.conf
-# cat ~/logs/clusters > $path/.kube/clusters
-# cat ~/logs/zone > $path/.kube/zone
+cat ~/.kube/config > $path/.kube/config
+cat ~/.kube/config > $path/.kube/admin.conf
+cat ~/logs/clusters > $path/.kube/clusters
+cat ~/logs/zone > $path/.kube/zone
 
 kubectl get nodes
 
