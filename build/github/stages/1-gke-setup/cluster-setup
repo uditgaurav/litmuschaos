@@ -26,7 +26,7 @@ cd
 pwd
 cat ~/.kube/config
 mkdir -p .kube
-cat ~/.kube/config > .kube/config
+echo $path
 cat ~/.kube/config > $path/.kube/config
 cat ~/.kube/config > $path/.kube/admin.conf
 cat ~/logs/clusters > $path/.kube/clusters
