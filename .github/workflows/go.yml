@@ -21,7 +21,7 @@ jobs:
         SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
 
-    - name: Creating nginx deployment
+    - name: Creating nginx deployment application
       run: kubectl run nginx --image=nginx
            
     - name: Running pod delete chaos experiment
@@ -44,6 +44,3 @@ jobs:
       env:
         SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-
-
-
