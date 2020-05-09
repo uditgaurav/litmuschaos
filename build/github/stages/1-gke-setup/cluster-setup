@@ -12,8 +12,8 @@ git clone https://github.com/uditgaurav/litmuschaos.git
 cd litmuschaos/build/github/stages/
 
 mkdir -p logs
-touch ~/logs/clusters
-touch ~/logs/zone
+touch logs/clusters
+touch logs/zone
 truncate -s 0 ~/logs/clusters
 truncate -s 0 ~/logs/zone
 
