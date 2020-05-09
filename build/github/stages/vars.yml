@@ -1,11 +1,11 @@
 ---
 user: "{{ lookup('env','GKEUSER') }}"
-initial_node_count: 3 # Also used as minimum number of nodes for autoscaling 
-max_node_count: 5 # Used as maximum number of nodes for autoscaling
-machine_type: n1-standard-4
+initial_node_count: 2 # Also used as minimum number of nodes for autoscaling 
+max_node_count: 3 # Used as maximum number of nodes for autoscaling
+machine_type: n1-standard-2
 disk_size_gb: 80
 image_type: Ubuntu
-project: openebs-ci
+project: serene-essence-253812
 auth_kind: serviceaccount
 ssh_key_fn: gke_ssh_key
 ssh_user: gkeuser
