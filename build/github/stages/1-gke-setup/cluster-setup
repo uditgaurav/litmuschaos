@@ -19,13 +19,6 @@ mkdir -p logs
 echo "creating cluster"
 
 ansible-playbook create-gke-cluster.yml -vv --extra-vars "project=${PROJECT_NAME}"
-cd /github
-mkdir -p .kube
-
-pwd
-ls
-cd
-pwd
 cat ~/.kube/config
 export KUBE_CONFIG_DATA="~/.kube/config"
 
@@ -37,3 +30,4 @@ export KUBE_CONFIG_DATA="~/.kube/config"
 # cat ~/logs/zone > $path/.kube/zone
 
 kubectl get nodes
+
