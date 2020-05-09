@@ -12,10 +12,10 @@ git clone https://github.com/uditgaurav/litmuschaos.git
 cd litmuschaos/build/github/stages/
 
 mkdir -p logs
-touch logs/clusters
-touch logs/zone
-chmod +x logs/clusters
-chmod +x logs/zone
+touch /home/runner/logs/clusters
+touch /home/runner/logs/zone
+chmod +x /home/runner/logs/clusters
+chmod +x /home/runner/logs/zone
 truncate -s 0 ~/logs/clusters
 truncate -s 0 ~/logs/zone
 
