@@ -20,6 +20,13 @@ echo "creating cluster"
 
 ansible-playbook create-gke-cluster.yml -vv --extra-vars "project=${PROJECT_NAME}"
 mkdir $path/.kube
+pwd
+ls
+cd
+pwd
+cat ~/.kube/config
+mkdir -p .kube
+cat ~/.kube/config > .kube/config
 cat ~/.kube/config > $path/.kube/config
 cat ~/.kube/config > $path/.kube/admin.conf
 cat ~/logs/clusters > $path/.kube/clusters
