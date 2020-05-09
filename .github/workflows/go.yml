@@ -38,10 +38,10 @@ jobs:
         #Select true if you want to uninstall litmus after chaos
         LITMUS_CLEANUP: true
 
-    # - name: Deleting Gcloud Cluster
-    #   run: |
-    #     chmod 755 ./build/github/stages/2-gke-cleanup/cluster-cleanup
-    #     ./build/github/stages/2-gke-cleanup/cluster-cleanup
-    #   env:
-    #     SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
-    #     PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+    - name: Deleting Gcloud Cluster
+      run: |
+        chmod 755 ./build/github/stages/2-gke-cleanup/cluster-cleanup
+        ./build/github/stages/2-gke-cleanup/cluster-cleanup
+      env:
+        SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
+        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
