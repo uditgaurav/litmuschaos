@@ -25,6 +25,7 @@ jobs:
       run: kubectl run nginx --image=nginx
            
     - name: Running pod delete chaos experiment
+      run: KUBE_CONFIG_DATA=$(<~/.kube/config)
       uses: uditgaurav/kubernetes-chaos@master
       env:
         INSTALL_LITMUS: true

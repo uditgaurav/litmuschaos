@@ -19,8 +19,7 @@ mkdir -p logs
 echo "creating cluster"
 
 ansible-playbook create-gke-cluster.yml -vv --extra-vars "project=${PROJECT_NAME}"
-cat ~/.kube/config
-export KUBE_CONFIG_DATA="~/.kube/config"
+KUBE_CONFIG_DATA=$(<~/.kube/config)
 
 # mkdir -p .kube
 # echo $path
