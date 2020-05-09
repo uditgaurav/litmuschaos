@@ -15,11 +15,11 @@ jobs:
 
     - name: Creating Gloud Cluster
       run: |
-        - chmod 755 ./build/gitlab/stages/1-gke-setup/cluster-setup
-        - ./build/gitlab/stages/1-gke-setup/cluster-setup
+        chmod 755 ./build/gitlab/stages/1-gke-setup/cluster-setup
+        ./build/gitlab/stages/1-gke-setup/cluster-setup
       env:
         SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
-        PROJECT_NAME: ${{ secrets.PROJECT_NAME }} 
+        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
            
     - name: Running pod delete chaos experiment
       uses: uditgaurav/kubernetes-chaos@master
@@ -40,8 +40,8 @@ jobs:
 
     - name: Deleting Gloud Cluster
       run: |
-        - chmod 755 ./build/gitlab/stages/2-gke-cleanup/cluster-cleanup
-        - ./build/gitlab/stages/2-gke-cleanup/cluster-cleanup
+        chmod 755 ./build/gitlab/stages/2-gke-cleanup/cluster-cleanup
+        ./build/gitlab/stages/2-gke-cleanup/cluster-cleanup
       env:
         SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
