@@ -1,0 +1,47 @@
+name: Push
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Creating Gcloud 3 Node Kubernetes Cluster
+      run: |
+        chmod 755 ./build/github/stages/1-gke-setup/cluster-setup
+        ./build/github/stages/1-gke-setup/cluster-setup
+      env:
+        SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
+        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+
+    - name: Creating nginx deployment application
+      run: kubectl run nginx --image=nginx 
+           
+    - name: Running pod delete chaos experiment
+      uses: uditgaurav/kubernetes-chaos@master
+      env:
+        INSTALL_LITMUS: true
+        APP_NS: default
+        APP_LABEL: run=nginx
+        TARGET_CONTAINER: nginx
+        EXPERIMENT_NAME: pod-delete
+        TOTAL_CHAOS_DURATION: 30
+        CHAOS_INTERVAL: 10
+        FORCE: false
+        #Select true if you want to uninstall litmus after chaos
+        LITMUS_CLEANUP: true
+
+    # - name: Deleting Gcloud Cluster
+    #   run: |
+    #     chmod 755 ./build/github/stages/2-gke-cleanup/cluster-cleanup
+    #     ./build/github/stages/2-gke-cleanup/cluster-cleanup
+    #   env:
+    #     SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
+    #     PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
