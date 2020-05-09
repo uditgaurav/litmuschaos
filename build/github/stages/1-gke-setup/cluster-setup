@@ -14,6 +14,8 @@ cd litmuschaos/build/github/stages/
 mkdir -p logs
 touch logs/clusters
 touch logs/zone
+chmod +x logs/clusters
+chmod +x logs/zone
 truncate -s 0 ~/logs/clusters
 truncate -s 0 ~/logs/zone
 
