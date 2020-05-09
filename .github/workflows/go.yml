@@ -13,9 +13,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Run ubuntu command
-      run: ls -ltr
-
+    - name: Creating Gloud Cluster
+      run: |
+        - chmod 755 ./build/gitlab/stages/1-gke-setup/cluster-setup
+        - ./build/gitlab/stages/1-gke-setup/cluster-setup
+      env:
+        SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
+        PROJECT_NAME: ${{ secrets.PROJECT_NAME }} 
+           
     - name: Running pod delete chaos experiment
       uses: uditgaurav/kubernetes-chaos@master
       env:
@@ -32,6 +37,14 @@ jobs:
         FORCE: false
         ##Select true if you want to uninstall litmus after chaos
 #         LITMUS_CLEANUP: true
+
+    - name: Deleting Gloud Cluster
+      run: |
+        - chmod 755 ./build/gitlab/stages/2-gke-cleanup/cluster-cleanup
+        - ./build/gitlab/stages/2-gke-cleanup/cluster-cleanup
+      env:
+        SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
+        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
 
 
 
