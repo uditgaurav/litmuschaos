@@ -41,7 +41,7 @@
         - name: create GKE cluster
           shell: > 
             gcloud container clusters create {{ cluster_name }}  --enable-autoscaling --max-nodes=3
-            --min-nodes=2 --machine-type=n1-standard-2  --image-type=ubuntu 
+            --min-nodes=2 --machine-type=n1-standard-1  --image-type=ubuntu 
             --zone {{ set_zone }}  --project={{ project }}  --scopes=https://www.googleapis.com/auth/cloud-platform
 
         - name: Save cluster info

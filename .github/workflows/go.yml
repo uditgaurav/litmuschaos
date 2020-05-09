@@ -26,8 +26,9 @@ jobs:
 
     - name: Present working directory
       run: |
+        ls
         pwd
-        ls      
+        ls -a     
            
     - name: Running pod delete chaos experiment
       uses: uditgaurav/kubernetes-chaos@master
