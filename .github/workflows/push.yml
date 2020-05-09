@@ -1,4 +1,4 @@
-name: Go
+name: Push
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Creating Gloud Cluster
+    - name: Creating Gcloud 3 Node Kubernetes Cluster
       run: |
         chmod 755 ./build/github/stages/1-gke-setup/cluster-setup
         ./build/github/stages/1-gke-setup/cluster-setup
@@ -22,7 +22,7 @@ jobs:
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
 
     - name: Creating nginx deployment application
-      run: kubectl run nginx --image=nginx
+      run: kubectl run nginx --image=nginx 
            
     - name: Running pod delete chaos experiment
       uses: uditgaurav/kubernetes-chaos@master
@@ -30,6 +30,7 @@ jobs:
         INSTALL_LITMUS: true
         APP_NS: default
         APP_LABEL: run=nginx
+        TARGET_CONTAINER: nginx
         EXPERIMENT_NAME: pod-delete
         TOTAL_CHAOS_DURATION: 30
         CHAOS_INTERVAL: 10
