@@ -12,12 +12,9 @@ git clone https://github.com/uditgaurav/litmuschaos.git
 cd litmuschaos/build/github/stages/
 
 mkdir -p logs
-echo "Some line" > /home/runner/logs/clusters
-echo "Some line" > /home/runner/logs/zone
-chmod +x /home/runner/logs/clusters
-chmod +x /home/runner/logs/zone
-truncate -s 0 ~/logs/clusters
-truncate -s 0 ~/logs/zone
+
+# truncate -s 0 ~/logs/clusters
+# truncate -s 0 ~/logs/zone
 
 echo "creating cluster"
 
