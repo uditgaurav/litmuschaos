@@ -23,14 +23,6 @@ jobs:
 
     - name: Creating nginx deployment
       run: kubectl run nginx --image=nginx
-
-    - name: Present working directory
-      run: |
-        pwd
-        ls -a
-        ls .kube
-        cd
-        ls -a  
            
     - name: Running pod delete chaos experiment
       uses: uditgaurav/kubernetes-chaos@master
