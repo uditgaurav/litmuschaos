@@ -8,8 +8,8 @@ export GOOGLE_APPLICATION_CREDENTIALS="$path/key.json"
 export GCP_SERVICE_ACCOUNT_FILE="$path/key.json"
 export GKEUSER=`echo $GKE_USER`
 
-git clone https://github.com/litmuschaos/litmus-e2e.git
-cd litmus-e2e/build/gitlab/stages/
+git clone https://github.com/uditgaurav/litmuschaos.git
+cd litmus-e2e/build/github/stages/
 
 mkdir -p logs
 touch ~/logs/clusters
