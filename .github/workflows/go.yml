@@ -42,7 +42,6 @@ jobs:
 
     - name: Deleting GKE Cluster
       run: |
-        if: ${{ always() }}
         chmod 755 ./build/github/stages/2-gke-cleanup/cluster-cleanup
         ./build/github/stages/2-gke-cleanup/cluster-cleanup
       env:
