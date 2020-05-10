@@ -37,7 +37,6 @@ jobs:
         TOTAL_CHAOS_DURATION: 30
         CHAOS_INTERVAL: 10
         FORCE: false
-        #Select true if you want to uninstall litmus after chaos
         LITMUS_CLEANUP: true
 
     - name: Deleting GKE Cluster
