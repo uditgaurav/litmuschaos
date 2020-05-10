@@ -22,9 +22,7 @@ jobs:
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
 
     - name: Creating nginx deployment application
-      run: |
-        chmod 755 ./litmus/app-deploy
-        ./litmus/app-deploy
+      run: kubectl apply -f litmus/nginx.yml
            
     - name: Running pod delete chaos experiment
       uses: uditgaurav/kubernetes-chaos@master
