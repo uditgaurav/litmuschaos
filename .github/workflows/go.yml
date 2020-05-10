@@ -30,6 +30,7 @@ jobs:
         INSTALL_LITMUS: true
         APP_NS: default
         APP_LABEL: run=nginx
+        APP_KIND: deployment
         TARGET_CONTAINER: nginx
         EXPERIMENT_NAME: pod-delete
         TOTAL_CHAOS_DURATION: 30
