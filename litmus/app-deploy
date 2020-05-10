@@ -2,5 +2,10 @@
 
 set -e
 
+mkdir -p ${HOME}/.kube
+value=`cat .kube/config`
+echo "$value" > ${HOME}/.kube/config
+export KUBECONFIG=${HOME}/.kube/config
+
 ##DEPLOYING nginx application pod in default namespace
 kubectl run nginx --image=nginx

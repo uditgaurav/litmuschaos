@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Creating Gcloud 3 Node Kubernetes Cluster
+    - name: Creating 3 Node GKE Cluster
       run: |
         chmod 755 ./build/github/stages/1-gke-setup/cluster-setup
         ./build/github/stages/1-gke-setup/cluster-setup
@@ -40,8 +40,9 @@ jobs:
         #Select true if you want to uninstall litmus after chaos
         LITMUS_CLEANUP: true
 
-    - name: Deleting Gloud Cluster
+    - name: Deleting GKE Cluster
       run: |
+        if: ${{ always() }}
         chmod 755 ./build/github/stages/2-gke-cleanup/cluster-cleanup
         ./build/github/stages/2-gke-cleanup/cluster-cleanup
       env:
