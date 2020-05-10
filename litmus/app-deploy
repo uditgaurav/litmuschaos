@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+##DEPLOYING nginx application pod in default namespace
+kubectl run nginx --image=nginx

@@ -22,7 +22,9 @@ jobs:
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
 
     - name: Creating nginx deployment application
-      run: kubectl run nginx --image=nginx 
+      run: |
+        chmod 755 ./litmus/app-deploy
+        ./litmus/app-deploy
            
     - name: Running pod delete chaos experiment
       uses: uditgaurav/kubernetes-chaos@master
@@ -38,7 +40,7 @@ jobs:
         #Select true if you want to uninstall litmus after chaos
         LITMUS_CLEANUP: true
 
-    - name: Deleting Gcloud Cluster
+    - name: Deleting Gloud Cluster
       run: |
         chmod 755 ./build/github/stages/2-gke-cleanup/cluster-cleanup
         ./build/github/stages/2-gke-cleanup/cluster-cleanup
