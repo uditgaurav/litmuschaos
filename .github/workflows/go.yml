@@ -32,7 +32,7 @@ jobs:
         APP_LABEL: run=nginx
         APP_KIND: deployment
         TARGET_CONTAINER: nginx
-        EXPERIMENT_NAME: %EXPERIMENT_NAME%
+        EXPERIMENT_NAME: pod-delete
         EXPERIMENT_IMAGE: litmuschaos/ansible-runner:latest        
         TOTAL_CHAOS_DURATION: 30
         CHAOS_INTERVAL: 10
@@ -45,4 +45,4 @@ jobs:
         ./build/github/stages/2-gke-cleanup/cluster-cleanup
       env:
         SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
-        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}  
