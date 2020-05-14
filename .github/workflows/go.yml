@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
 
@@ -20,6 +19,11 @@ jobs:
       env:
         SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
 
     - name: Creating nginx deployment application
       run: kubectl apply -f litmus/nginx.yml
@@ -39,6 +43,12 @@ jobs:
         FORCE: false
         LITMUS_CLEANUP: true
 
+  cleanup:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+      
     - name: Deleting GKE Cluster
       run: |
         chmod 755 ./build/github/stages/2-gke-cleanup/cluster-cleanup
