@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app
+  labels:
+    run: hello-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: hello-app
+  template:
+    metadata:
+      labels:
+        run: hello-app
+    spec:
+      containers:
+      - name: hello-app
+        image: uditgaurav/action-demo:v3
+        imagePullPolicy: IfNotPresent
+        command: ['sh', '-c', 'while sleep 1; do echo "Hello world!!!"; done']
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: dockersocket
+            mountPath: /var/run/docker.sock
+      volumes:
+        - hostPath:
+            path: /var/run/docker.sock
+          name: dockersocket
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: hello-app
+  name: hello-app
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: hello-app

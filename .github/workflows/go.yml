@@ -1,56 +1,122 @@
- 
-name: Push
-
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  issue_comment:
+    types: [created, edited, deleted]
+
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
+      - name: Setup
+        if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/run-e2e')
+        uses: actions/setup-go@v2
+      - name: Prerequisites
+        if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/run-e2e')
+        run: |
+          export GOPATH=$HOME/go/
+          mkdir -p $HOME/go/src/github.com/mayadata-io/
+          cd /home/runner/go/src/github.com/mayadata-io/
+          git clone https://github.com/mayadata-io/chaos-ci-lib
+          kind create cluster --loglevel debug --wait=5m
+          kubectl cluster-info --context kind-kind          
+          go test chaos-ci-lib/tests/install-litmus_test.go -v -count=1
+          kubectl run nginx --image=nginx --restart=Always
+          sleep 5  
 
-    - name: Creating 3 Node GKE Cluster
-      run: |
-        chmod 755 ./build/github/stages/1-gke-setup/cluster-setup
-        ./build/github/stages/1-gke-setup/cluster-setup
-      env:
-        SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
-        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-
-    - name: Creating nginx deployment application
-      run: kubectl apply -f litmus/nginx.yml
-
-    - name: Set config
-      run: echo ::set-env name=KUBE_CONFIG_DATA::$(base64 -w 0 ~/.kube/config)
-           
-    - name: Running Litmus pod delete chaos experiment
-      uses: mayadata-io/github-chaos-actions@v0.1.0
-      env:
-        ##If litmus is not installed
-        INSTALL_LITMUS: true
-        ##Give application info under chaos
-        APP_NS: default
-        APP_LABEL: run=nginx
-        APP_KIND: deployment
-        EXPERIMENT_NAME: pod-delete
-        ##Custom image can also been used
-        EXPERIMENT_IMAGE: litmuschaos/ansible-runner:latest        
-        TOTAL_CHAOS_DURATION: 30
-        CHAOS_INTERVAL: 10
-        FORCE: false
-        ##Select true if you want to uninstall litmus after chaos
-        LITMUS_CLEANUP: true
+      - name: Running app
+        if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/run-e2e-pod-delete')
+        run: |
+          cd /home/runner/go/src/github.com/mayadata-io/
+          go test chaos-ci-lib/tests/pod-delete_test.go -v -count=1
+                    
+      - name: Running app
+        if: contains(github.event.comment.html_url, '/pull/') && contains(github.event.comment.body, '/run-e2e-all')
+        run: |
+          echo "Hello all"
 
 
-    - name: Deleting GKE Cluster
-      run: |
-        chmod 755 ./build/github/stages/2-gke-cleanup/cluster-cleanup
-        ./build/github/stages/2-gke-cleanup/cluster-cleanup
-      env:
-        SDK_TOKEN: ${{ secrets.SDK_TOKEN }}
-        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}  
+
+# name: Push
+# on:
+#   push:
+#     branches: [ master ]
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+
+#     - name: "[Prepare]: Docker build a custom image"
+#       run: |
+#         sudo docker build -t uditgaurav/action-demo:v3 .
+
+#     - name: Docker images
+#       run: |
+#         sudo docker images
+
+
+#     - name: "[Prepare]: Biuld KinD cluster"
+#       run: |
+#         kind version
+#         kind create cluster --loglevel debug --wait=5m
+#         kind get kubeconfig --internal >$HOME/.kube/config
+
+#     - name: "[Prepare]: Getting nodes"
+#       run: |
+#         kubectl get nodes
+
+#     - name: "[Prepare]: Setting up kubeconfig ENV for Github Chaos Action"
+#       run: echo ::set-env name=KUBE_CONFIG_DATA::$(base64 -w 0 ~/.kube/config)
+  
+#     - name: "[Prepare]: Launch an application with IfNotPresent pull policy"
+#       run: |
+#         kind load docker-image uditgaurav/action-demo:v3
+#         kubectl create -f litmus/hello-app.yml
+
+#     - name: "[Status]: Waiting for app pod to come in Running state"
+#       run: |
+#         bash ./litmus/status-check.sh
+#         kubectl get pods
+#       env: 
+#         APP_LABEL: run=hello-app
+#         APP_NS: default
+
+#     - name: "[Prepare]: Launch the liveness/steady-state check application"
+#       run: |
+#         kubectl create -f litmus/liveness.yml
+#         kubectl get pods
+
+#     - name: "[Status]: Waiting for liveness pod to come in Running state"
+#       run: |
+#         bash ./litmus/status-check.sh
+#         kubectl get pods
+#       env: 
+#         APP_LABEL: run=liveness-app
+#         APP_NS: default        
+       
+#     - name: "[Inject]: Running pod delete chaos experiment"
+#       uses: mayadata-io/github-chaos-actions@v0.1.0
+#       env:
+#         ##If litmus is not installed
+#         INSTALL_LITMUS: true
+#         ##Give application info under chaos
+#         APP_NS: default
+#         APP_LABEL: run=hello-app
+#         APP_KIND: deployment
+#         EXPERIMENT_NAME: pod-delete
+#         ##Custom images can also be used
+#         EXPERIMENT_IMAGE: litmuschaos/ansible-runner:latest        
+#         TOTAL_CHAOS_DURATION: 30
+#         CHAOS_INTERVAL: 10
+#         FORCE: false
+#         ##Select true if you want to uninstall litmus after chaos
+#         LITMUS_CLEANUP: true
+
+#     - name: "[Post-Chaos]: Docker push after sanity check"
+#       run: |
+#         sudo docker login -u ${{ secrets.DUSER  }} -p "${{ secrets.DPASS  }}"
+#         sudo docker push uditgaurav/action-demo:v3
+
+#     - name: "[Cleanup]: Tear down hello-app deployment"
+#       run: |
+#         kubectl delete deploy hello-app -n default
