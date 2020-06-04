@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: uditgaurav/docker-build:ci
+        image: nginx:latest
         ports:
         - containerPort: 80
