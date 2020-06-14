@@ -1,15 +1,12 @@
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: nginx
   labels:
     run: nginx
 spec:
   replicas: 3
-  selector:
-    matchLabels:
-      run: nginx
   template:
     metadata:
       labels:
