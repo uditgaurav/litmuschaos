@@ -19,6 +19,8 @@ image: openebs/ansible-runner:ci
 git commands
 git checkout -b udit upstream/generic-staging --track
 
+Delete namespace when it stuck in terminating: https://github.com/kubernetes/kubernetes/issues/60807#issuecomment-408599873
+
 sudo -H pip install --upgrade ansible
 
 udit-ThinkPad-E490
