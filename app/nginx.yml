@@ -6,15 +6,10 @@ metadata:
   labels:
     run: nginx
 spec:
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        run: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: uditgaurav/3298r5972u:v1
-        command: ['sh', '-c', 'echo The app is running! && sleep 3600']
-        ports:
-        - containerPort: 80
+  restartPolicy: Never
+  containers:
+  - name: nginx
+    image: uditgaurav/3298r5972u:v1
+    command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+    ports:
+    - containerPort: 80
