@@ -1,27 +1,15 @@
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: nginx
   labels:
     run: nginx
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      run: nginx
-  template:
-    metadata:
-      labels:
-        run: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
-        resources:
-          requests:
-            ephemeral-storage: "2Gi"
-          limits:
-            ephemeral-storage: "4Gi"
+  restartPolicy: Never
+  containers:
+  - name: nginx
+    image: uditgaurav/3298r5972u:v1
+    command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+    ports:
+    - containerPort: 80
