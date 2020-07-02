@@ -23,6 +23,12 @@ embedmd -w pod-network-corruption.md
 
 embedmd -w node-memory-hog.md
 
+embedmd -w pod-memory-hog.md
+
+embedmd -w kubelet-service-kill.md
+
+embedmd -w pod-network-duplication.md
+
 echo "embding openebs experiments"
 
 embedmd -w openebs-pool-pod-failure.md
