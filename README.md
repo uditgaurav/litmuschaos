@@ -1,6 +1,6 @@
 # litmuschaos
 This repository is for testing purpose 
-https://gitlab.mayadata.io/litmuschaos/litmus-e2e/badges/openebs/pipeline.svg
+[Status](https://gitlab.mayadata.io/litmuschaos/litmus-e2e/badges/openebs/pipeline.svg)
 
 # container kill
 
