@@ -1,7 +1,7 @@
 # litmuschaos
 This repository is for testing purpose <br><br>
-***Latest Pipeline Status***</u><br><br>
-[![pipeline status](https://gitlab.mayadata.io/litmuschaos/litmus-e2e/badges/litmus-portal/pipeline.svg)](https://gitlab.mayadata.io/litmuschaos/litmus-e2e/commits/generic)
+***Latest Pipeline Status***</u><br>
+- [![pipeline status](https://gitlab.mayadata.io/litmuschaos/litmus-e2e/badges/litmus-portal/pipeline.svg)](https://gitlab.mayadata.io/litmuschaos/litmus-e2e/commits/generic)
 
 # container kill
 
