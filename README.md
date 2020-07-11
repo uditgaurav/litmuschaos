@@ -7,7 +7,6 @@ This repository is for testing purpose <br><br>
 
 Test name is [container kill](https://github.com/uditgaurav/litmuschaos/tree/master/generic-pipeline/container-kill)
 
-Other Test name is [container kill](https://raw.githubusercontent.com/uditgaurav/litmusc)
 
 | Job ID |   Test Description         | Execution Time |Test Result   |
  |---------|---------------------------| --------------|--------|
