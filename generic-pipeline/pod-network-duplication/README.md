@@ -1,6 +1,4 @@
-# Pod Network Duplication
-
-## Experiment Metadata
+# Litmuschaos Generic E2E Pipeline Execution Details
 
 <table>
 <tr>
@@ -9,13 +7,14 @@
 <th> Documentation Link </th>
 </tr>
 <tr>
- <td> Pod Network Duplication </td>
- <td> This experiment causes network duplication using pumba. It injects network duplication on the specified container by starting a traffic control (tc) process with netem rules. It Can test the application's resilience to duplicate network </td>
- <td>  <a href="https://docs.litmuschaos.io/docs/pod-network-duplication/"> Here </a> </td>
+ <td> Generic Experiment</td>
+ <td> Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications. It groups containers that make up an application into logical units for easier management and discovery. It will install all the experiments which can be used to inject chaos into containerized applications. </td>
+ <td>  <a href="https://docs.litmuschaos.io/docs"> Here </a> </td>
  </tr>
  </table>
 
+***Latest Pipeline Status***</u><br><br>
+[![pipeline status](https://gitlab.mayadata.io/litmuschaos/litmus-e2e/badges/generic/pipeline.svg)](https://gitlab.mayadata.io/litmuschaos/litmus-e2e/commits/generic)
+
 
 ### Pipeline Runs
-
-
