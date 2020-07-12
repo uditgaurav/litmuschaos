@@ -5,7 +5,7 @@ This repository is for testing purpose <br><br>
 
 # container kill
 
-Test name is [container kill](https://github.com/uditgaurav/litmuschaos/tree/master/generic-pipeline/container-kill)
+Test name is <a href=generic-pipeline/README.md> container kill</a>
 
 
 | Job ID |   Test Description         | Execution Time |Test Result   |
