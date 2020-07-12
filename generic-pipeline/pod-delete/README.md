@@ -16,8 +16,3 @@
  </table>
 
  ### Pipeline Runs
-
- 
-| Job ID |   Test Description         | Execution Time |Stage   |Test Result   |
- |---------|---------------------------| --------------|--------|
- |     <a href= "https://gitlab.mayadata.io/litmuschaos/litmus-e2e/-/jobs/129034">129034</a>           |  Pod Delete experiment is used to kill a pod           | 12:12:12 IST  | Experiment | Passed |
