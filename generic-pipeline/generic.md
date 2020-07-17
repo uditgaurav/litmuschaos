@@ -6,6 +6,9 @@
 
 | Pipeline ID |   Execution Time        | Release Version | Coverage (in %) |
 |---------|---------------------------|--------------|--------------|
+|     <a href= "https://gitlab.mayadata.io/litmuschaos/litmus-e2e/pipelines/21391">21391</a>           |  Fri Jul 17 14:26:51 2020(IST)           |   | [![94
+%](https://progress-bar.dev/94
+)](https://github.com/litmuschaos/litmus-e2e/blob/generic/.master-plan.yml)  |
 |     <a href= "https://gitlab.mayadata.io/litmuschaos/litmus-e2e/pipelines/21391">21391</a>           |  Fri Jul 17 14:24:10 2020(IST)           |   | [![94
 %](https://progress-bar.dev/94
 )]((https://github.com/litmuschaos/litmus-e2e/blob/generic/.master-plan.yml))  |
