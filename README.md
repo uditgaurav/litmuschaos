@@ -6,6 +6,7 @@ This repository is for testing purpose <br><br>
 [![90%](https://progress-bar.dev/90)](https://github.com/litmuschaos/litmus-e2e/blob/generic/.master-plan.yml)
 
 # container kill
+[![94%](https://progress-bar.dev/94)](https://github.com/litmuschaos/litmus-e2e/blob/generic/.master-plan.yml)
 
 Test name is <a href=generic-pipeline/README.md> container kill</a>
 
