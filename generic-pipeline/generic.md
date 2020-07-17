@@ -6,6 +6,7 @@
 
 | Pipeline ID |   Execution Time        | Release Version | Coverage (in %) |
 |---------|---------------------------|--------------|--------------|
+|     <a href= "https://gitlab.mayadata.io/litmuschaos/litmus-e2e/pipelines/21391">21391</a>           |  Fri Jul 17 14:56:13 2020(IST)           |   | [![94%](https://progress-bar.dev/94)](https://bit.ly/2OLie8t)  |
 |     <a href= "https://gitlab.mayadata.io/litmuschaos/litmus-e2e/pipelines/21391">21391</a>           |  Fri Jul 17 14:43:50 2020(IST)           |   | [![94
 %](https://progress-bar.dev/94
 )](https://bit.ly/2OLie8t)  |
