@@ -20,4 +20,5 @@ theme: Architect
 
 | Job ID |   Test Description         | Execution Time | Release Tag   | Test Result   |
  |---------|---------------------------| --------------|--------|--------|
+|     <a href= "https://gitlab.mayadata.io/litmuschaos/litmus-e2e/-/jobs/182991">182991</a>           |  Kill one container in the application pod           | Mon Jul 27 04:56:48 2020(IST)  | ci | Passed :smiley: |
  |    <a href= "https://gitlab.mayadata.io/litmuschaos/litmus-e2e/-/jobs/"></a>   |  Kill one container in the application pod           |  Sun Jul 26 00:14:56 2020(IST)     |ci  |Passed :smiley:  |
