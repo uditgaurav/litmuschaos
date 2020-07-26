@@ -20,4 +20,5 @@
  
 | Job ID |   Test Description         | Execution Time | Release Tag   | Test Result   |
  |---------|---------------------------| --------------|--------|--------|
+|     <a href= "https://gitlab.mayadata.io/litmuschaos/litmus-e2e/-/jobs/182999">182999</a>           |  Exhaust CPU resources on the Kubernetes Node           | Mon Jul 27 05:15:10 2020(IST)  | ci | Passed :smiley: |
  |    <a href= "https://gitlab.mayadata.io/litmuschaos/litmus-e2e/-/jobs/"></a>   |  Kills the kubelet service on the application node           |  Sun Jul 26 03:27:12 2020(IST)     |ci  |Passed :smiley:  |
