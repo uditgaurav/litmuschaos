@@ -21,6 +21,8 @@ git checkout -b udit upstream/generic-staging --track
 
 Delete namespace when it stuck in terminating: https://github.com/kubernetes/kubernetes/issues/60807#issuecomment-408599873
 
+Update go version: https://gist.github.com/nikhita/432436d570b89cab172dcf2894465753#gistcomment-2350191
+
 sudo -H pip install --upgrade ansible
 
 udit-ThinkPad-E490
