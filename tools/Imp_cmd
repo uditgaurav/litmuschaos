@@ -8,6 +8,11 @@ sed -i -e "s/^enabled=1/enabled=0/" /etc/yum.repos.d/epel.repo
 yum -y --enablerepo=epel install ansible pyOpenSSL
 
 
+git pull upstream mastwer
+git fetch upstream
+git checkout -b 1.6.1_tracker --track upstream/v1.6.x
+then you compare git log and cherry pick
+
 TO create Service Account on a Namespace
 --------------------------------------------------
 oc adm policy add-scc-to-user anyuid system:serviceaccount:percona1:default
