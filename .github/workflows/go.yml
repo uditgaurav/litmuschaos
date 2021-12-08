@@ -1,1 +1,26 @@
-#nothing now
+name: litmus-ansible-ci
+on:
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: prepare file
+        run: echo "${{ secrets.FILE }}" > azure.auth
+        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: myfile
+          path: |
+            ${{ github.workspace }}/azure.auth
